@@ -8,11 +8,10 @@ import {
   Button,
   Textarea
 } from '@chakra-ui/react'
-import React from 'react'
 
-export default function EditModal({ isOpen, onChange }) {
+export function UserHelpEditModal({ isOpen, changeIsOpen }) {
   return (
-    <AlertDialog isOpen={isOpen} onClose={() => onChange(!isOpen)}>
+    <AlertDialog isOpen={isOpen} onClose={() => changeIsOpen(!isOpen)}>
       <AlertDialogOverlay>
         <AlertDialogContent>
           <AlertDialogHeader fontSize="lg" fontWeight="bold">
@@ -20,19 +19,14 @@ export default function EditModal({ isOpen, onChange }) {
           </AlertDialogHeader>
 
           <AlertDialogBody>
-            <Textarea height={'300px'}>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Qui
-              tempora recusandae assumenda vitae. Nemo cumque error deleniti ad
-              deserunt distinctio dolore maiores ipsam necessitatibus illo,
-              nobis ipsum adipisci ipsa excepturi.
-            </Textarea>
+            <Textarea minH={'10vh'} />
           </AlertDialogBody>
 
           <AlertDialogFooter>
-            <Button onClick={() => onChange(!isOpen)}>Cancelar</Button>
+            <Button onClick={() => changeIsOpen(!isOpen)}>Cancelar</Button>
             <Button
               colorScheme="green"
-              onClick={() => onChange(!isOpen)}
+              onClick={() => changeIsOpen(!isOpen)}
               ml={3}
             >
               Confirmar

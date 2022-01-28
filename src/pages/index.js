@@ -1,4 +1,4 @@
-import { Center, Text, Button, VStack, Heading } from '@chakra-ui/react'
+import { Center, Button, VStack, Heading } from '@chakra-ui/react'
 import Link from 'next/link'
 
 export default function Home() {

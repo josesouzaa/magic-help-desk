@@ -1,13 +1,13 @@
+import { useState } from 'react'
 import { Button, HStack } from '@chakra-ui/react'
-import React, { useState } from 'react'
 import { AiOutlineEdit } from 'react-icons/ai'
 import { BiTrash } from 'react-icons/bi'
-import DeleteModal from './DeleteModal'
-import EditModal from './EditModal'
+import { AdminHelpAnswerModal } from './AdminHelpAnswerModal'
+import { AdminHelpDeleteModal } from './AdminHelpDeleteModal'
 
-export default function Buttons() {
+export function AdminHelpButtons() {
   const [deleteIsOpen, setDeleteIsOpen] = useState(false)
-  const [editIsOpen, setEditIsOpen] = useState(false)
+  const [answerIsOpen, setAnswerIsOpen] = useState(false)
 
   return (
     <>
@@ -27,14 +27,20 @@ export default function Buttons() {
           w={'100%'}
           colorScheme={'purple'}
           rightIcon={<AiOutlineEdit fontSize={'20px'} />}
-          onClick={() => setEditIsOpen(true)}
+          onClick={() => setAnswerIsOpen(true)}
         >
-          Editar
+          Responder
         </Button>
       </HStack>
 
-      <DeleteModal isOpen={deleteIsOpen} onChange={setDeleteIsOpen} />
-      <EditModal isOpen={editIsOpen} onChange={setEditIsOpen} />
+      <AdminHelpDeleteModal
+        isOpen={deleteIsOpen}
+        changeIsOpen={setDeleteIsOpen}
+      />
+      <AdminHelpAnswerModal
+        isOpen={answerIsOpen}
+        changeIsOpen={setAnswerIsOpen}
+      />
     </>
   )
 }

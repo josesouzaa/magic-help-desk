@@ -4,15 +4,12 @@ import {
   HStack,
   IconButton,
   Text,
-  Menu,
-  MenuButton,
-  MenuList,
   Button
 } from '@chakra-ui/react'
 import { BiLogOut, BiUser } from 'react-icons/bi'
 import Link from 'next/link'
 
-export default function Header() {
+export function Header() {
   return (
     <Box
       w={'100%'}
@@ -32,42 +29,38 @@ export default function Header() {
         <Link href="/" passHref>
           <Text
             as={'h1'}
-            fontSize={'2xl'}
+            fontSize={['lg', 'lg', '2xl']}
             fontWeight={'semibold'}
             cursor={'pointer'}
             color={'purple.200'}
+            display={['none', 'block']}
           >
             Magic Help Desk
           </Text>
         </Link>
 
-        <HStack>
-          <Text as={'span'} color={'whiteAlpha.900'}>
+        <HStack w={['100%', 'auto']}>
+          <Text as={'span'} color={'whiteAlpha.900'} flexGrow={'2'}>
             Username
           </Text>
 
-          <Menu>
-            <MenuButton>
-              <IconButton
-                as={'span'}
-                colorScheme={'purple'}
-                fontSize={'20px'}
-                borderRadius={'full'}
-                size={'sm'}
-                icon={<BiUser />}
-              />
-            </MenuButton>
+          <IconButton
+            colorScheme={'purple'}
+            fontSize={'20px'}
+            borderRadius={'full'}
+            size={'sm'}
+            cursor={'pointer'}
+            icon={<BiUser />}
+          />
 
-            <MenuList bg={'blackAlpha.900'} border={'none'} px={'2'}>
-              <Button
-                colorScheme={'purple'}
-                w={'100%'}
-                rightIcon={<BiLogOut />}
-              >
-                Logout
-              </Button>
-            </MenuList>
-          </Menu>
+          <Button
+            variant={'outline'}
+            colorScheme={'purple'}
+            size={'sm'}
+            rightIcon={<BiLogOut />}
+          >
+            Logout
+          </Button>
         </HStack>
       </Container>
     </Box>

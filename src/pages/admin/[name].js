@@ -1,19 +1,17 @@
 import { Container, SimpleGrid } from '@chakra-ui/react'
+import { AdminHelp } from '../../components/Admin/AdminHelp'
 import { Header } from '../../components/Header'
-import { UserHelp } from '../../components/User/UserHelp'
-import { AddUserHelpButton } from '../../components/User/AddUserHelpButton'
 
-export default function UserName() {
+export default function AdminName() {
   return (
     <>
       <Header />
       <Container maxW={'container.lg'} mt={'70px'}>
-        <AddUserHelpButton />
         <SimpleGrid columns={['1', '1', '2']} spacing={'4'}>
-          <UserHelp />
-          <UserHelp />
-          <UserHelp />
-          <UserHelp />
+          <AdminHelp />
+          <AdminHelp />
+          <AdminHelp />
+          <AdminHelp />
         </SimpleGrid>
       </Container>
     </>

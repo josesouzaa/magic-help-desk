@@ -1,7 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react'
-import Buttons from './Buttons'
+import { AdminHelpButtons } from './AdminHelpButtons'
 
-export default function Chamado() {
+export function AdminHelp() {
   return (
     <Flex
       flexDir={'column'}
@@ -20,6 +20,21 @@ export default function Chamado() {
         textAlign={'justify'}
         borderRadius={'4'}
       >
+        Descrição do chamado. Lorem ipsum dolor sit amet, consectetur
+        adipisicing elit. Magnam reprehenderit ipsam error aperiam non!
+        Recusandae fugit inventore repellat, omnis eum sed rerum. Illo nostrum
+        error quaerat tenetur earum quod dolorum.
+      </Text>
+
+      <Text
+        p={'2'}
+        bg={'blackAlpha.50'}
+        textAlign={'justify'}
+        borderRadius={'4'}
+      >
+        <Text as={'span'} fontWeight={'bold'} mr={'2'}>
+          Resposta:
+        </Text>
         Descrição do chamado. Lorem ipsum dolor sit amet, consectetur
         adipisicing elit. Magnam reprehenderit ipsam error aperiam non!
         Recusandae fugit inventore repellat, omnis eum sed rerum. Illo nostrum
@@ -54,7 +69,7 @@ export default function Chamado() {
         </Text>
       </Text>
 
-      <Buttons />
+      <AdminHelpButtons />
     </Flex>
   )
 }
