@@ -1,7 +1,8 @@
 import { createContext, useContext, useState } from 'react'
 import { GoogleAuthProvider, getAuth, signInWithPopup } from 'firebase/auth'
-import { app } from '../services/firebaseConfig'
 import { useRouter } from 'next/router'
+import { api } from '../services/api'
+import { app } from '../services/firebaseConfig'
 
 const AuthContext = createContext({})
 
@@ -14,14 +15,17 @@ export function AuthProvider({ children }) {
 
   async function signIn() {
     const result = await signInWithPopup(auth, authProvider)
-    console.log(result)
     const { user } = result
+
+    const response = await api.get('/admins')
+    const { admins } = response.data
+
     setSession({
       id: user.uid,
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
-      isAdmin: user.email === 'josee.souzaaa@gmail.com' ? true : false
+      isAdmin: admins.find((admin) => admin.email === user.email) ? true : false
     })
 
     if (user.email === 'josee.souzaaa@gmail.com') {
