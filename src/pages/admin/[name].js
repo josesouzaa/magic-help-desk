@@ -1,8 +1,13 @@
 import { Container, SimpleGrid } from '@chakra-ui/react'
-import { AdminHelp } from '../../components/Admin/AdminHelp'
+import { useAuth } from '../../contexts/authContext'
 import { Header } from '../../components/Header'
+import { AdminHelp } from '../../components/Admin/AdminHelp'
+import { NotAuthorized } from '../../components/NotAuthorized'
 
 export default function AdminName() {
+  const { session } = useAuth()
+
+  if (!session.id) return <NotAuthorized />
   return (
     <>
       <Header />

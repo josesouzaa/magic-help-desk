@@ -1,15 +1,11 @@
-import {
-  Box,
-  Container,
-  HStack,
-  IconButton,
-  Text,
-  Button
-} from '@chakra-ui/react'
-import { BiLogOut, BiUser } from 'react-icons/bi'
+import { Box, Container, HStack, Text, Button, Avatar } from '@chakra-ui/react'
+import { BiLogOut } from 'react-icons/bi'
 import Link from 'next/link'
+import { useAuth } from '../../contexts/authContext'
 
 export function Header() {
+  const { session } = useAuth()
+
   return (
     <Box
       w={'100%'}
@@ -41,16 +37,13 @@ export function Header() {
 
         <HStack w={['100%', 'auto']}>
           <Text as={'span'} color={'whiteAlpha.900'} flexGrow={'2'}>
-            Username
+            {session.name}
           </Text>
 
-          <IconButton
-            colorScheme={'purple'}
-            fontSize={'20px'}
-            borderRadius={'full'}
+          <Avatar
             size={'sm'}
-            cursor={'pointer'}
-            icon={<BiUser />}
+            name={session.name}
+            src={session ? session.photo : 'https://bit.ly/broken-link'}
           />
 
           <Button
