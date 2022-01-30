@@ -21,14 +21,14 @@ export function AuthProvider({ children }) {
     const { admins } = response.data
 
     setSession({
-      id: user.uid,
+      uid: user.uid,
       name: user.displayName,
       email: user.email,
       photo: user.photoURL,
       isAdmin: admins.find((admin) => admin.email === user.email) ? true : false
     })
 
-    if (user.email === 'josee.souzaaa@gmail.com') {
+    if (admins.find((admin) => admin.email === user.email)) {
       route.push(`/admin/${user.uid}`)
     } else {
       route.push(`/user/${user.uid}`)

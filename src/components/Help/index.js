@@ -1,7 +1,12 @@
 import { Flex, Text } from '@chakra-ui/react'
-import { AdminHelpButtons } from './AdminHelpButtons'
+import { UserHelpButtons } from '../User/UserHelpButtons'
+import { AdminHelpButtons } from '../Admin/AdminHelpButtons'
+import { useAuth } from '../../contexts/authContext'
+import moment from 'moment'
 
-export function AdminHelp() {
+export function Help({ help }) {
+  const { session } = useAuth()
+
   return (
     <Flex
       flexDir={'column'}
@@ -11,7 +16,7 @@ export function AdminHelp() {
       gap={'4'}
     >
       <Text as={'h3'} fontSize={'2xl'} fontWeight={'bold'}>
-        Título do chamado
+        {help.title}
       </Text>
 
       <Text
@@ -20,10 +25,7 @@ export function AdminHelp() {
         textAlign={'justify'}
         borderRadius={'4'}
       >
-        Descrição do chamado. Lorem ipsum dolor sit amet, consectetur
-        adipisicing elit. Magnam reprehenderit ipsam error aperiam non!
-        Recusandae fugit inventore repellat, omnis eum sed rerum. Illo nostrum
-        error quaerat tenetur earum quod dolorum.
+        Descrição do chamado. {help.description}
       </Text>
 
       <Text
@@ -51,7 +53,7 @@ export function AdminHelp() {
       >
         Aberto em:
         <Text fontWeight={'normal'} color={'blackAlpha.900'}>
-          01/01/2022
+          {moment(help.createdAt).format('ll')}
         </Text>
       </Text>
 
@@ -65,11 +67,11 @@ export function AdminHelp() {
       >
         Fechado em:
         <Text fontWeight={'normal'} color={'blackAlpha.900'}>
-          01/01/2022
+          {moment(help.updatedAt).format('ll')}
         </Text>
       </Text>
 
-      <AdminHelpButtons />
+      {session.isAdmin ? <AdminHelpButtons /> : <UserHelpButtons />}
     </Flex>
   )
 }

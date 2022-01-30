@@ -11,10 +11,10 @@ export default function Home() {
   const route = useRouter()
 
   useEffect(() => {
-    if (session.id && session.isAdmin) {
-      route.push(`/admin/${session.id}`)
-    } else if (session.id && session.isAdmin === false) {
-      route.push(`/user/${session.id}`)
+    if (session.uid && session.isAdmin) {
+      route.push(`/admin/${session.uid}`)
+    } else if (session.uid && session.isAdmin === false) {
+      route.push(`/user/${session.uid}`)
     }
   }, [route, session])
 
