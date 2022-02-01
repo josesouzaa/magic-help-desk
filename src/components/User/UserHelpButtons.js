@@ -5,7 +5,7 @@ import { BiTrash } from 'react-icons/bi'
 import { UserHelpDeleteModal } from './UserHelpDeleteModal'
 import { UserHelpEditModal } from './UserHelpEditModal'
 
-export function UserHelpButtons() {
+export function UserHelpButtons({ help }) {
   const [deleteIsOpen, setDeleteIsOpen] = useState(false)
   const [editIsOpen, setEditIsOpen] = useState(false)
 
@@ -28,6 +28,7 @@ export function UserHelpButtons() {
           colorScheme={'purple'}
           rightIcon={<AiOutlineEdit fontSize={'20px'} />}
           onClick={() => setEditIsOpen(true)}
+          disabled={help.answeredAt ? true : false}
         >
           Editar
         </Button>
@@ -36,8 +37,13 @@ export function UserHelpButtons() {
       <UserHelpDeleteModal
         isOpen={deleteIsOpen}
         changeIsOpen={setDeleteIsOpen}
+        help={help}
       />
-      <UserHelpEditModal isOpen={editIsOpen} changeIsOpen={setEditIsOpen} />
+      <UserHelpEditModal
+        isOpen={editIsOpen}
+        changeIsOpen={setEditIsOpen}
+        help={help}
+      />
     </>
   )
 }

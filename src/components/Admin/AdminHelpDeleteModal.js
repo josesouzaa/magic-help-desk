@@ -7,8 +7,14 @@ import {
   AlertDialogOverlay,
   Button
 } from '@chakra-ui/react'
+import { api } from '../../services/api'
 
-export function AdminHelpDeleteModal({ isOpen, changeIsOpen }) {
+export function AdminHelpDeleteModal({ isOpen, changeIsOpen, help }) {
+  async function handleRemove() {
+    const { data } = await api.delete('/admin', { helpId: help._id })
+    changeIsOpen(!isOpen)
+  }
+
   return (
     <AlertDialog isOpen={isOpen} onClose={() => changeIsOpen(!isOpen)}>
       <AlertDialogOverlay>
@@ -23,11 +29,7 @@ export function AdminHelpDeleteModal({ isOpen, changeIsOpen }) {
 
           <AlertDialogFooter>
             <Button onClick={() => changeIsOpen(!isOpen)}>Cancelar</Button>
-            <Button
-              colorScheme="red"
-              onClick={() => changeIsOpen(!isOpen)}
-              ml={3}
-            >
+            <Button colorScheme="red" ml={3} onClick={handleRemove}>
               Deletar
             </Button>
           </AlertDialogFooter>

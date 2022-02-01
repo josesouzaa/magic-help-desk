@@ -5,7 +5,7 @@ import { BiTrash } from 'react-icons/bi'
 import { AdminHelpAnswerModal } from './AdminHelpAnswerModal'
 import { AdminHelpDeleteModal } from './AdminHelpDeleteModal'
 
-export function AdminHelpButtons() {
+export function AdminHelpButtons({ help }) {
   const [deleteIsOpen, setDeleteIsOpen] = useState(false)
   const [answerIsOpen, setAnswerIsOpen] = useState(false)
 
@@ -28,6 +28,7 @@ export function AdminHelpButtons() {
           colorScheme={'purple'}
           rightIcon={<AiOutlineEdit fontSize={'20px'} />}
           onClick={() => setAnswerIsOpen(true)}
+          disabled={help.answeredAt ? true : false}
         >
           Responder
         </Button>
@@ -36,10 +37,12 @@ export function AdminHelpButtons() {
       <AdminHelpDeleteModal
         isOpen={deleteIsOpen}
         changeIsOpen={setDeleteIsOpen}
+        help={help}
       />
       <AdminHelpAnswerModal
         isOpen={answerIsOpen}
         changeIsOpen={setAnswerIsOpen}
+        help={help}
       />
     </>
   )

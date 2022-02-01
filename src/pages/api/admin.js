@@ -2,42 +2,30 @@ import dbConnect from '../../services/dbConnect'
 import Help from '../../models/Help'
 
 export default async function handler(req, res) {
-  const { method } = req
   const body = req.body
+  const { method } = req
 
   await dbConnect()
 
   switch (method) {
-    case 'POST':
-      try {
-        const newHelp = await Help.create({
-          title: body.title,
-          temperature: body.temperature,
-          description: body.description,
-          createdBy: body.createdBy,
-          createdByUid: body.createdByUid
-        })
-        await newHelp.save()
-        res.status(201).json({ success: true, data: newHelp })
-      } catch (error) {
-        res.status(400).json({ success: false })
-      }
-      break
-
     case 'PUT':
       try {
-        const helpToUpdate = await Help.findByIdAndUpdate(
+        const helpToAnswered = await Help.findByIdAndUpdate(
           body.helpId,
-          { description: body.description },
+          {
+            answer: body.answer,
+            answeredBy: body.answeredBy,
+            answeredByUid: body.answeredByUid,
+            answeredAt: new Date()
+          },
           { new: true }
         )
-        await helpToUpdate.save()
-        res.status(201).json({ success: true, data: helpToUpdate })
+        await helpToAnswered.save()
+        res.status(201).json({ success: true, data: helpToAnswered })
       } catch (error) {
         res.status(400).json({ success: false })
       }
       break
-
     case 'DELETE':
       try {
         const helpToDelete = await Help.findByIdAndDelete(body.helpId)
@@ -46,7 +34,6 @@ export default async function handler(req, res) {
         res.status(400).json({ success: false })
       }
       break
-
     default:
       res.status(400).json({ success: false })
       break

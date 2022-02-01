@@ -17,7 +17,10 @@ export function AddUserHelpButton() {
         Abrir novo chamado
       </Button>
 
-      <AddUserHelpModal isOpen={addHelpIsOpen} onChange={setAddHelpIsOpen} />
+      <AddUserHelpModal
+        isOpen={addHelpIsOpen}
+        changeIsOpen={setAddHelpIsOpen}
+      />
     </>
   )
 }

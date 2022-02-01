@@ -1,4 +1,4 @@
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Text, VStack } from '@chakra-ui/react'
 import { UserHelpButtons } from '../User/UserHelpButtons'
 import { AdminHelpButtons } from '../Admin/AdminHelpButtons'
 import { useAuth } from '../../contexts/authContext'
@@ -19,14 +19,10 @@ export function Help({ help }) {
         {help.title}
       </Text>
 
-      <Text
-        p={'2'}
-        bg={'blackAlpha.50'}
-        textAlign={'justify'}
-        borderRadius={'4'}
-      >
-        Descrição do chamado. {help.description}
-      </Text>
+      <VStack spacing={'0'} alignItems={'flex-start'}>
+        <Text fontSize={'xs'}>ID: {help._id}</Text>
+        <Text fontSize={'xs'}>Chamado de: {help.createdBy}</Text>
+      </VStack>
 
       <Text
         p={'2'}
@@ -34,14 +30,29 @@ export function Help({ help }) {
         textAlign={'justify'}
         borderRadius={'4'}
       >
-        <Text as={'span'} fontWeight={'bold'} mr={'2'}>
-          Resposta:
-        </Text>
-        Descrição do chamado. Lorem ipsum dolor sit amet, consectetur
-        adipisicing elit. Magnam reprehenderit ipsam error aperiam non!
-        Recusandae fugit inventore repellat, omnis eum sed rerum. Illo nostrum
-        error quaerat tenetur earum quod dolorum.
+        {help.description}
       </Text>
+
+      {help.answer && (
+        <VStack
+          alignItems={'stretch'}
+          bg={'blackAlpha.50'}
+          borderRadius={'4'}
+          p={'2'}
+        >
+          <Text textAlign={'justify'} borderRadius={'4'}>
+            <Text as={'span'} fontWeight={'bold'} mr={'2'}>
+              Resposta:
+            </Text>
+            {help.answer ? help.answer : 'Chamado em aberto...'}
+          </Text>
+
+          <Text fontSize={'xs'}>Respondido por: {help.answeredBy}</Text>
+          <Text fontSize={'xs'}>
+            Respondido em: {moment(help.answeredAt).format('ll')}
+          </Text>
+        </VStack>
+      )}
 
       <Text
         as={'span'}
@@ -57,21 +68,27 @@ export function Help({ help }) {
         </Text>
       </Text>
 
-      <Text
-        as={'span'}
-        display={'flex'}
-        gap={'2'}
-        fontWeight={'semibold'}
-        color={'red.500'}
-        fontSize={'smaller'}
-      >
-        Fechado em:
-        <Text fontWeight={'normal'} color={'blackAlpha.900'}>
-          {moment(help.updatedAt).format('ll')}
+      {help.answeredAt && (
+        <Text
+          as={'span'}
+          display={'flex'}
+          gap={'2'}
+          fontWeight={'semibold'}
+          color={'red.500'}
+          fontSize={'smaller'}
+        >
+          Fechado em:
+          <Text fontWeight={'normal'} color={'blackAlpha.900'}>
+            {moment(help.answeredAt).format('ll')}
+          </Text>
         </Text>
-      </Text>
+      )}
 
-      {session.isAdmin ? <AdminHelpButtons /> : <UserHelpButtons />}
+      {session.isAdmin ? (
+        <AdminHelpButtons help={help} />
+      ) : (
+        <UserHelpButtons help={help} />
+      )}
     </Flex>
   )
 }

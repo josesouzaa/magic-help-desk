@@ -28,7 +28,10 @@ const HelpSchema = new mongoose.Schema(
     answeredBy: {
       type: String
     },
-    answeredWhen: {
+    answeredByUid: {
+      type: String
+    },
+    answeredAt: {
       type: Date
     }
   },

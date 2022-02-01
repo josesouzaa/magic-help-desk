@@ -13,14 +13,14 @@ import {
   Select,
   Textarea
 } from '@chakra-ui/react'
-import { useState } from 'react'
 import { useAuth } from '../../contexts/authContext'
 import { api } from '../../services/api'
+import { useForm } from '../../hooks/useForm'
 
-export function AddUserHelpModal({ isOpen, onChange }) {
+export function AddUserHelpModal({ isOpen, changeIsOpen }) {
   const { session } = useAuth()
 
-  const [form, setForm] = useState({
+  const { form, setForm, handleChange } = useForm({
     title: '',
     temperature: '',
     description: '',
@@ -28,32 +28,20 @@ export function AddUserHelpModal({ isOpen, onChange }) {
     createdByUid: session.uid
   })
 
-  function handleChange(e) {
-    const target = e.target
-    const value = target.value
-    const name = target.name
-
-    setForm({
-      ...form,
-      [name]: value
-    })
-  }
-
   async function handleSumit(e) {
     e.preventDefault()
-    const response = await api.post('/help', form)
-    const data = response.data
-    onChange(!isOpen)
+    const { data } = await api.post('/help', form)
+    changeIsOpen(!isOpen)
     setForm({
       ...form,
-      title: null,
-      temperature: null,
-      description: null
+      title: '',
+      temperature: '',
+      description: ''
     })
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={() => onChange(!isOpen)}>
+    <Modal isOpen={isOpen} onClose={() => changeIsOpen(!isOpen)}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Abrir novo chamado</ModalHeader>
@@ -107,7 +95,7 @@ export function AddUserHelpModal({ isOpen, onChange }) {
           </ModalBody>
 
           <ModalFooter>
-            <Button type="button" mr={3} onClick={() => onChange(!isOpen)}>
+            <Button type="button" mr={3} onClick={() => changeIsOpen(!isOpen)}>
               Close
             </Button>
             <Button colorScheme={'green'} type="submit">
