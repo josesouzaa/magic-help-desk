@@ -30,7 +30,7 @@ export function AddUserHelpModal({ isOpen, changeIsOpen }) {
 
   async function handleSumit(e) {
     e.preventDefault()
-    const { data } = await api.post('/help', form)
+    await api.post('/help', form)
     changeIsOpen(!isOpen)
     setForm({
       ...form,

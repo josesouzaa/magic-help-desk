@@ -19,7 +19,7 @@ export function UserHelpEditModal({ isOpen, changeIsOpen, help }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const { data } = await api.put('/help', form)
+    await api.put('/help', form)
     changeIsOpen(!isOpen)
     setForm({
       ...form,
@@ -37,6 +37,7 @@ export function UserHelpEditModal({ isOpen, changeIsOpen, help }) {
 
           <form action="submit" onSubmit={handleSubmit}>
             <AlertDialogBody>
+              <p></p>
               <Textarea
                 minH={'10vh'}
                 name="description"

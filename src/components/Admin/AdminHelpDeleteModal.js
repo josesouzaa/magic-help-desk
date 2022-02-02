@@ -11,7 +11,7 @@ import { api } from '../../services/api'
 
 export function AdminHelpDeleteModal({ isOpen, changeIsOpen, help }) {
   async function handleRemove() {
-    const { data } = await api.delete('/admin', { helpId: help._id })
+    await api.delete('/admin', { helpId: help._id })
     changeIsOpen(!isOpen)
   }
 

@@ -26,7 +26,7 @@ export function AdminHelpAnswerModal({ isOpen, changeIsOpen, help }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const { data } = await api.put('/admin', form)
+    await api.put('/admin', form)
     changeIsOpen(!isOpen)
     setForm({
       ...form,

@@ -1,4 +1,4 @@
-import { Flex, Text, VStack } from '@chakra-ui/react'
+import { Box, Flex, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 import { UserHelpButtons } from '../User/UserHelpButtons'
 import { AdminHelpButtons } from '../Admin/AdminHelpButtons'
 import { useAuth } from '../../contexts/authContext'
@@ -54,41 +54,50 @@ export function Help({ help }) {
         </VStack>
       )}
 
-      <Text
-        as={'span'}
-        display={'flex'}
-        gap={'2'}
-        fontWeight={'semibold'}
-        color={'green.500'}
-        fontSize={'smaller'}
-      >
-        Aberto em:
-        <Text fontWeight={'normal'} color={'blackAlpha.900'}>
-          {moment(help.createdAt).format('ll')}
-        </Text>
-      </Text>
-
-      {help.answeredAt && (
-        <Text
-          as={'span'}
+      <SimpleGrid columns={['1', '1', '2']} spacing={'4'}>
+        <Box
           display={'flex'}
-          gap={'2'}
-          fontWeight={'semibold'}
-          color={'red.500'}
-          fontSize={'smaller'}
+          flexDir={['column', 'row']}
+          alignItems={['flex-start', 'center']}
+          gap={['0', '2']}
         >
-          Fechado em:
-          <Text fontWeight={'normal'} color={'blackAlpha.900'}>
-            {moment(help.answeredAt).format('ll')}
+          <Text
+            as={'span'}
+            display={'flex'}
+            gap={'2'}
+            fontWeight={'semibold'}
+            color={'green.500'}
+            fontSize={'smaller'}
+          >
+            Aberto em:
+            <Text fontWeight={'normal'} color={'blackAlpha.900'}>
+              {moment(help.createdAt).format('ll')}
+            </Text>
           </Text>
-        </Text>
-      )}
 
-      {session.isAdmin ? (
-        <AdminHelpButtons help={help} />
-      ) : (
-        <UserHelpButtons help={help} />
-      )}
+          {help.answeredAt && (
+            <Text
+              as={'span'}
+              display={'flex'}
+              gap={'2'}
+              fontWeight={'semibold'}
+              color={'red.500'}
+              fontSize={'smaller'}
+            >
+              Fechado em:
+              <Text fontWeight={'normal'} color={'blackAlpha.900'}>
+                {moment(help.answeredAt).format('ll')}
+              </Text>
+            </Text>
+          )}
+        </Box>
+
+        {session.isAdmin ? (
+          <AdminHelpButtons help={help} />
+        ) : (
+          <UserHelpButtons help={help} />
+        )}
+      </SimpleGrid>
     </Flex>
   )
 }

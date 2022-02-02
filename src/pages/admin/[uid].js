@@ -14,7 +14,7 @@ export default function AdminUid({ helps }) {
     <>
       <Header />
       <Container maxW={'container.lg'} mt={'70px'}>
-        <SimpleGrid columns={['1', '1', '2']} spacing={'4'}>
+        <SimpleGrid columns={'1'} spacing={'4'}>
           {helps.map((help) => (
             <HelpComponent key={help._id} help={help} />
           ))}

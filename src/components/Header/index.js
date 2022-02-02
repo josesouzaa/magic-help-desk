@@ -2,9 +2,16 @@ import { Box, Container, HStack, Text, Button, Avatar } from '@chakra-ui/react'
 import { BiLogOut } from 'react-icons/bi'
 import Link from 'next/link'
 import { useAuth } from '../../contexts/authContext'
+import { useRouter } from 'next/router'
 
 export function Header() {
-  const { session } = useAuth()
+  const { session, setSession } = useAuth()
+  const router = useRouter()
+
+  function handleLogout() {
+    setSession({})
+    router.push('/')
+  }
 
   return (
     <Box
@@ -23,7 +30,7 @@ export function Header() {
         alignItems={'center'}
         h={'100%'}
       >
-        <Link href="/" passHref>
+        <Link href={router.asPath} passHref>
           <Text
             as={'h1'}
             fontSize={['lg', 'lg', '2xl']}
@@ -52,6 +59,7 @@ export function Header() {
             colorScheme={'purple'}
             size={'sm'}
             rightIcon={<BiLogOut />}
+            onClick={handleLogout}
           >
             Logout
           </Button>
