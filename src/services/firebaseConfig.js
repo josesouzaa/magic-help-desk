@@ -5,12 +5,12 @@ import { initializeApp } from 'firebase/app'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: 'AIzaSyB8Z7JVp8qnKn4dN2usSjRURxWcHIKP1V8',
-  authDomain: 'magic-help-desk.firebaseapp.com',
-  projectId: 'magic-help-desk',
-  storageBucket: 'magic-help-desk.appspot.com',
-  messagingSenderId: '356028339493',
-  appId: '1:356028339493:web:360c675371c2ff936e76cc'
+  apiKey: process.env.FIREBASE_APY_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID
 }
 
 // Initialize Firebase
